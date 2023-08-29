@@ -1,0 +1,181 @@
+SISTEM ORDER PT. DAK
+
+* Kebutuhan Sistem
+[x] Login & Registrasi
+[x] 2 Level user (admin & member)
+[x] Memberikan notifikasi melalui email
+[ ] Menu Admin (Bagian Perencanaan):
+    [x] Informasi Barang masuk dan keluar secara keseluruhan
+    [ ] Informasi Barang masuk dan keluar per bengkel
+    [x] Grafik orderan tiap pekan (Barang masuk, order dalam proses, order selesai) secara keseluruhan
+    [ ] Grafik orderan tiap pekan (Barang masuk, order dalam proses, order selesai) per bengkel
+    [x] Input Data Pegawai
+    [ ] Mengubah Data Pegawai
+    [x] Input data order tingkat 2: No. SPK, estimasi waktu, penempatan pekerjaan (bengkel), kategori pekerjaan (perbaikan/pembuatan)
+    [x] Laporan Barang masuk dan keluar
+    [x] Download laporan per bulan (.xlsx)
+
+[x] Menu Member:
+    [x] Ubah data pribadi
+    [x] Ganti password
+    [x] History pengubahan pada tiap bagian
+    [x] Input data order per bagian:
+        [x] Bagian pelayanan konsumen:
+            [x] Tingkat 1 (data barang masuk) :
+                [x] Nama barang
+                [x] Nama user
+                [x] Jumlah
+                [x] Tanggal masuk
+                [x] Keperluan (disimpan, diperbaiki, dibuat)
+                [x] Tingkat prioritas
+
+            [x] Tingkat 5 (data barang keluar) :
+                [x] Tanggal keluar
+
+        [x] Bagian bengkel (tingkat 3):
+            [x] Progres pengerjaan di bengkel
+            [x] Keterangan
+
+        [x] QC (tingkat 4):
+            [x] No. BAP
+
+* Alur kerja:
+1. Pelayanan konsumen mengisi informasi order masuk
+2. Jika ada barang yang perlu diperbaiki atau dibuat, bagian perencanaan mengisi informasi kelengkapan data order yang akan dikerjakan di bengkel
+3. Bagian bengkel mengisi progres pengerjaan order (per hari)
+4. QC mengisi No. BAP
+5. Pelayanan konsumen melengkapi tanggal keluar barang
+
+* Model MVC:
+[ ] model
+    [ ] admin
+    [ ] auth
+    [x] user
+    [ ] order
+
+[x] view
+    [x] auth
+        [x] login
+        [x] lupa password
+
+    [x] admin
+        [x] grafik
+        [x] laporan
+        [x] data admin
+        [x] data pegawai
+        [x] input data pegawai
+    
+    [x] user
+        [ ] home
+        [x] profile
+        [x] ubah password
+
+    [x] form
+        [x] form input bagian pelayanan konsumen
+        [x] form input bagian perencanaan
+        [x] form input bagian bengkel
+        [x] form input bagian QC
+    
+[ ] controller
+    [ ] auth
+        [x] login
+        [ ] lupa password
+
+    [x] admin
+        [x] index
+        [x] grafik
+        [x] laporan
+        [x] input data pegawai
+    
+    [x] user
+        [x] profile
+        [x] ubah password
+
+    [x] form
+        [x] form input bagian pelayanan konsumen
+        [x] input bagian perencanaan
+        [x] form input bagian bengkel
+        [x] form input bagian QC
+        [x] notify
+
+* DB
+* tabel untuk user
+[x] user (id PK, nama, email, password, id_bagian)
+[x] menu (id PK, menu)
+[x] bagian (id PK, bagian)
+[x] user_access_menu (id PK, id_bagian, id_menu)
+* tabel untuk order
+[x] order (id PK, no_spk, nama_barang, nama_user, jumlah, tgl_masuk, tk_prioritas, est_waktu, penempatan_pengerjaan, kat_pengerjaan, progres_bengkel, keterangan, no_bap, tgl_keluar)
+
+-- Tambahan --
+* Admin
+[x] Reset password dilakukan admin
+
+* User
+[x] Laporan barang yang belum diproses
+[x] Laporan barang dalam proses
+[x] Laporan barang selesai
+[x] Tampilan laporan diubah (status, no bap, tanggal terkirim, no. spb)
+[x] Tambah laporan barang di bagian pelayanan konsumen
+[x] Tabel di home ditambahkan kolom jumlah, satuan, progres pengerjaan dan kolom No. BAP
+[x] Tampilan riwayat kerusakan di form bengkel
+[x] Tanggal BAP di form QC
+[x] No. SPB di form Barang Keluar
+[x] History ditambah progress bengkel
+[x] Input data order tingkat 2 ditambah Nama Planner
+[x] Input barang masuk ditambah Nomor Memo User (tidak wajib), Nama pengirim, Satuan, jika diperbaiki, muncul input riwayat kerusakan (teks)
+[x] Halaman edit pelayanan konsumen tambah input No. SPB
+
+[x] Jika eror tidak mengulang dari awal
+[x] Estimasi biaya (Planning Cost) pada form perencanaan (tidak harus diisi)
+[x] Nama pengirim dibuat opsional
+[x] Ubah posisi keperluan dan prioritas
+[x] Halaman edit laporan di pelayanan konsumen kurang nama pengirim dan no memo user
+[x] User menggunakan dopdown
+[x] Jika user tidak ada di dropdown, tambahkan input untuk user
+[x] Form Laporan diubah menjadi Form Penerimaan Barang
+[x] Keperluan ditambah pengawetan
+[x] Laporan Barang diubah jadi Monitoring order
+[x] Satuan waktu pada estimasi waktu
+[x] HAPUS HALAMAN PROFIL
+[x] No. Ceklist
+[x] Progres (dalam persen)
+
+[ ] Grafik dibuat per tahun
+[ ] BUG DI KEPERLUAN HALAMAN EDIT FORM
+
+[ ] Buat 1 superuser untuk menambahkan data pengguna
+
+
+[x] Tambah kolom catatan pada setiap bagian
+[x] Tambah Afkir pada keperluan (Yanmen) -> langsung ke QC
+[x] Tambah Kolom Tujuan pada form keluar (yanmen), menggunakan data customer
+[x] Tambah pilihan hasil pemeriksaan pada QC (Approved, Afkir, Rework) -> Rework masuk ke bengkel (progres bengkel jadi 50%)
+[x] Tambah no MPP di form barang masuk (opsional)
+
+[x] Tambah kolom estimasi bahan dan estimasi tenaga kerja pada form perencanaan
+[x] Tambah list material pada estimasi bahan (perencanaan) [nama bahan, jumlah, harga satuan, total harga]
+[x] Munculkan estimasi waktu, bahan dan tenaga kerja pada form bengkel
+
+[x] Jika progres sudah 100%, tambahkan kolom realisasi bahan, waktu dan tenaga kerja (bengkel)
+[x] Username menggunakan nama
+
+[x] Buat total harga menjadi hasil dari perkalian jumlah dan harga satuan
+
+[x] Hapus data order di bagian yanmen dan perencanaan
+
+[x] No MPP muncul pada halaman perencanaan
+[x] Afkir masuk ke order selesai setelah diproses QC
+[x] Tambahkan kolom satuan pada estimasi bahan di perencanaan
+[x] Wajib diisi, reposisi dengan planning cost pada kolom estimasi tenaga kerja
+[x] Hubungkan total harga dengan planning cost pada list material estimasi bahan
+[x] Tambah kolom satuan pada kolom realisasi bahan
+
+* Database
+[x] tabel order tambah kolom riwayat_kerusakan, satuan, nama_pengirim, nama_planner, no_memo_user, tanggal_selesai, tgl_bap, no_spb
+[x] tabel user_access_menu tambah value (2, 5)
+[x] buat tabel customer (nama)
+[x] tabel order ditambah kolom catatan yanmen, catatan perencanaan, catatan bengkel, catatan qc, tujuan
+
+* MASALAH LAIN
+[ ] Hapus data user masih menggunakan metode GET
